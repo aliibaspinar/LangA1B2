@@ -1,0 +1,191 @@
+/* LinguaFlow - Modern Aesthetic Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: #111827;
+    --bg-card-subtle: #162032;
+    --border-color: #1f293d;
+    --border-hover: #374151;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --accent: #6366f1;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+::-webkit-scrollbar-thumb {
+    background: #25334d;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #374b70;
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    transform: translateY(-1px);
+}
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Lesson Table */
+.lesson-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: rgba(17, 24, 39, 0.6);
+    border: 1px solid var(--border-color);
+}
+.lesson-table th {
+    background-color: rgba(31, 41, 55, 0.7);
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #93c5fd;
+}
+.lesson-table td {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(31, 41, 55, 0.6);
+}
+
+/* Tab Switching */
+.tab-btn {
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+.tab-btn.active-tab {
+    color: #60a5fa !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Vocab Card Interactive Flip */
+.vocab-card {
+    perspective: 1000px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.vocab-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Match Card */
+.match-card {
+    transition: all 0.15s ease;
+}
+.match-card:hover:not(.matched) {
+    transform: translateX(2px);
+}
+.match-card.matched {
+    pointer-events: none;
+}
+
+/* Responsive Table Wrapper */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Sentence Builder Chips */
+.word-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    margin: 4px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+.word-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.word-chip-source {
+    background-color: #1f293d;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+}
+.word-chip-source:hover {
+    background-color: #2b3954;
+    border-color: #60a5fa;
+    color: #ffffff;
+}
+.word-chip-selected {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: 1px solid #3b82f6;
+    color: #ffffff;
+}
+
+/* Dialogue Speech Bubbles */
+.dialogue-speaker-a {
+    background-color: rgba(30, 58, 138, 0.25);
+    border-left: 3px solid #3b82f6;
+}
+.dialogue-speaker-b {
+    background-color: rgba(67, 56, 202, 0.25);
+    border-left: 3px solid #818cf8;
+}
+
+/* Mini Drill Box */
+.mini-drill-box {
+    background: radial-gradient(circle at top left, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+    border: 1px solid rgba(71, 85, 105, 0.5);
+}

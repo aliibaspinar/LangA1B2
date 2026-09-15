@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguaFlow - A1'den B2'ye İngilizce Öğrenme & Değerlendirme</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+
+    <!-- Üst Başlık & Menü -->
+    <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold shadow-lg shadow-blue-500/30 text-lg">
+                    LF
+                </div>
+                <div>
+                    <h1 class="text-base font-extrabold text-white leading-none">LinguaFlow</h1>
+                    <p class="text-xs text-gray-400 mt-0.5">A1 ➔ B2 İngilizce Rehberi</p>
+                </div>
+            </div>
+
+            <!-- Kontroller & Ayarlar -->
+            <div class="flex items-center gap-3 text-xs">
+                <!-- Haluk Tatar Playlist Butonu -->
+                <a href="https://www.youtube.com/playlist?list=PLxX2m2Np79VfE8qgLtUZHwCF0VyuFH8QI" target="_blank" rel="noopener noreferrer" 
+                    class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/20 text-red-300 hover:bg-red-600/30 border border-red-500/30 font-bold transition-all" title="Haluk Tatar - Sıfırdan İngilizce Eğitim Seti">
+                    <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    <span>Haluk Tatar Eğitimi</span>
+                </a>
+
+                <!-- Telaffuz Hızı -->
+                <div class="hidden sm:flex items-center gap-1.5 bg-gray-800/80 px-2.5 py-1.5 rounded-lg border border-gray-700">
+                    <span class="text-gray-400">🔊 Hız:</span>
+                    <select id="select-speech-speed" class="bg-transparent text-gray-200 font-semibold focus:outline-none cursor-pointer">
+                        <option value="0.75" class="bg-gray-900">0.75x</option>
+                        <option value="0.9" selected class="bg-gray-900">0.90x</option>
+                        <option value="1.0" class="bg-gray-900">1.0x</option>
+                    </select>
+                </div>
+
+                <!-- Serbest Keşif Modu (Tüm kilitleri aç) -->
+                <label class="flex items-center gap-2 cursor-pointer select-none bg-gray-800/80 px-2.5 py-1.5 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors" title="Sınav şartı olmadan tüm seviyeleri serbestçe incelemenizi sağlar">
+                    <input type="checkbox" id="toggle-free-mode" class="rounded border-gray-700 text-blue-600 focus:ring-0">
+                    <span class="text-gray-300 font-medium">Serbest Mod</span>
+                </label>
+
+                <!-- Sıfırla -->
+                <button id="btn-reset-progress" class="text-gray-400 hover:text-rose-400 transition-colors px-2 py-1" title="İlerlemeyi sıfırla">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ana Gövde -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- CEFR Seviye Kartları Navigasyonu -->
+        <section>
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400">Avrupa Dil Portfolyosu (CEFR) Kademeleri</h2>
+                <span class="text-xs text-blue-400">A1 Açık • Sınavı Geçtikçe Seviye Kilidi Açılır</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5" id="level-nav-container">
+                <!-- Seviye düğmeleri dinamik render edilir -->
+            </div>
+        </section>
+
+        <!-- Seçili Seviye Banner & Sekmeler -->
+        <section class="bg-gray-900/50 border border-gray-800/80 rounded-2xl p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-800">
+                <div>
+                    <h2 id="current-level-title" class="text-2xl font-black text-white">Yükleniyor...</h2>
+                    <p id="current-level-desc" class="text-sm text-gray-400 mt-1 max-w-3xl">...</p>
+                </div>
+            </div>
+
+            <!-- Sekme Seçimi -->
+            <div class="flex items-center gap-8 mt-4 border-b border-gray-800 overflow-x-auto">
+                <button id="tab-lessons" class="tab-btn active-tab pb-3 text-sm font-bold flex items-center gap-2 cursor-pointer border-b-2">
+                    <span>📖 Konu Anlatımı & Kritik Noktalar</span>
+                </button>
+                <button id="tab-vocab" class="tab-btn pb-3 text-sm font-semibold text-gray-400 flex items-center gap-2 cursor-pointer border-b-2">
+                    <span>🗂️ Ünite Kelimeleri (Flashcards)</span>
+                </button>
+                <button id="tab-reading" class="tab-btn pb-3 text-sm font-semibold text-gray-400 flex items-center gap-2 cursor-pointer border-b-2">
+                    <span>📚 Okuma & Dinleme Parçaları</span>
+                </button>
+                <button id="tab-exam" class="tab-btn pb-3 text-sm font-semibold text-gray-400 flex items-center gap-2 cursor-pointer border-b-2">
+                    <span>🎓 Seviye Sonu Değerlendirme Sınavı</span>
+                </button>
+            </div>
+
+            <!-- İçerik Alanı -->
+            <div id="main-content-area" class="mt-6">
+                <!-- Dinamik İçerik -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Alt Bilgi -->
+    <footer class="border-t border-gray-800/60 bg-gray-950 py-6 text-center text-xs text-gray-500">
+        <p>LinguaFlow • A1-B2 İngilizce Öğrenme & Seviye Atlama Platformu • Yerel Veri & Telaffuz Motoru ile Desteklenmektedir</p>
+    </footer>
+
+    <!-- Scriptler -->
+    <script src="js/speech.js"></script>
+    <script src="js/data/levelA1.js"></script>
+    <script src="js/data/levelA2.js"></script>
+    <script src="js/data/levelB1.js"></script>
+    <script src="js/data/levelB2.js"></script>
+    <script src="js/quizEngine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
